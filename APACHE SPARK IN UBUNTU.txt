@@ -1,0 +1,74 @@
+
+Configure Apache Spark
+------------------------------------------------------------
+
+1)
+VER=3.5.4
+wget https://dlcdn.apache.org/spark/spark-$VER/spark-$VER-bin-hadoop3.tgz
+
+2) tar xvf spark-$VER-bin-hadoop3.tgz
+
+
+
+3) sudo mv spark-$VER-bin-hadoop3/     /opt/spark
+
+
+4) 
+	nano ~/.bashrc
+	---------------------------------------
+	export SPARK_HOME=/opt/spark
+	export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+	-------------------------------------------
+
+	source ~/.bashrc
+
+5)	nano $SPARK_HOME/conf/spark-env.sh
+	-------------------------------------------------
+	
+	export HADOOP_HOME=/home/hadoopuser/hadoop
+	export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+
+6)
+	cd hadoop/sbin
+
+	start-master.sh
+
+	start-slave.sh spark://localhost:7077
+ 
+	jps
+		master
+		worker
+
+
+7)	Access Spark UI
+
+		http://localhost:8080
+
+
+8) Create text file with some data and put into hadoop hdfs
+
+	hdfs dfs -put data.txt   /input
+
+9) Open a terminal and start the PySpark shell by running:
+
+	pyspark
+
+10) Write the Word Count Program:
+
+# Create a Spark session
+	from pyspark.sql import SparkSession
+	spark = SparkSession.builder.appName("WordCount").getOrCreate()
+
+# Read text file
+	text_file = spark.read.text("/input/data.txt")
+
+# Split lines into words and perform word count
+     words = text_file.rdd.flatMap(lambda line: line.value.split(" "))
+      word_counts = words.map(lambda word: (word, 1)).reduceByKey(lambda a, b: a + b)
+
+# Collect and print the results
+	for word, count in word_counts.collect():
+	    print(f"{word}: {count}")
+
+# Stop the Spark session
+spark.stop()

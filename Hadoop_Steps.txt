@@ -1,0 +1,57 @@
+Steps
+
+https://linuxhint.com/install-apache-hadoop-ubuntu/
+
+https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz
+
+
+
+Remove Lock
+--------------------------------
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
+sudo rm /var/lib/dpkg/lock*
+
+
+1)Remove SSH with the following command:
+
+	sudo apt-get remove openssh-client openssh-server
+
+2) Install SSH again with:
+
+	sudo apt-get install openssh-client openssh-server
+
+3) ssh localhost
+
+
+Sudo Permission for Hadoop user
+------------------------------------------
+	sudo visudo
+	hadoopuser  ALL=(ALL:ALL) ALL
+	save file
+
+start-dfs.sh command error
+-------------------------------------------------------
+Generate new keygen.
+
+	ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+Register key gen:
+
+	cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+
+---------------------------
+https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz
+
+Hadoop NameNode
+
+	http://127.0.0.1:9870
+
+Hadoop resource manager
+
+	http://127.0.0.1:8088
+
+
+
+
+

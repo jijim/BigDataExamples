@@ -1,0 +1,37 @@
+Basic HDFS Commands
+---------------------------------------------
+
+Create a Directory
+	hdfs fs -mkdir /path/to/directory
+
+		hdfs fs - mkdir  /SampleDir
+
+
+List Files and Directories
+	hdfs fs -ls   /path/to/directory
+
+
+Upload a File to HDFS
+	hdfs fs -put    /local/path/to/file      /hdfs/path/to/destination
+
+Download a File from HDFS
+	hdfs fs -get /hdfs/path/to/file /local/path/to/destination
+
+Delete a File or Directory
+	hdfs fs -rm /path/to/file
+	hdfs fs -rmdir -r /path/to/directory
+
+Display File Contents
+	hdfs fs -cat /path/to/file
+
+Move a File within HDFS
+	hdfs fs -mv /hdfs/path/to/source /hdfs/path/to/destination
+
+Check Disk Usage
+	hdfs fs -du -h /path/to/directory
+
+Change File Permissions
+	hdfs fs -chmod 755 /path/to/file
+
+
+

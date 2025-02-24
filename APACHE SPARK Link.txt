@@ -1,0 +1,60 @@
+
+Configure Apache Spark
+------------------------------------------------------------
+
+1)
+VER=3.5.4
+wget https://dlcdn.apache.org/spark/spark-$VER/spark-$VER-bin-hadoop3.tgz
+
+2) tar xvf spark-$VER-bin-hadoop3.tgz
+
+
+
+3) sudo mv spark-$VER-bin-hadoop3/ /opt/spark
+
+
+4) 
+	nano ~/.bashrc
+	---------------------------------------
+	export SPARK_HOME=/opt/spark
+	export PATH=$PATH:$SPARK_HOME/bin:$SPARK_HOME/sbin
+	-------------------------------------------
+
+	source ~/.bashrc
+
+5)	nano $SPARK_HOME/conf/spark-env.sh
+	-------------------------------------------------
+	
+	export HADOOP_HOME=/home/hadoopuser/hadoop
+	export HADOOP_CONF_DIR=$HADOOP_HOME/etc/hadoop
+
+6)
+	cd hadoop/sbin
+
+	start-master.sh
+
+	start-slave.sh spark://localhost:7077
+ 
+	jps
+		master
+		worker
+
+
+7)	Access Spark UI
+
+		http://localhost:8080
+
+	
+import org.apache.spark.sql.SparkSession
+
+val spark = SparkSession.builder.appName("SparkSQLExample").getOrCreate()
+
+val df = spark.read.option("header", "true").csv("/home/hadoopuser/data.csv")
+
+df.createOrReplaceTempView("table_name")
+val result = spark.sql("SELECT * FROM table_name WHERE age > 30")
+result.show()
+
+
+
+

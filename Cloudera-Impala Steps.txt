@@ -1,0 +1,67 @@
+
+Create a table in Impala within Cloudera:
+--------------------------------------------------------------
+Create data.csv 
+	1,John Doe,30
+	2,Jane Smith,25
+	3,Emily Johnson,35
+	4,Michael Brown,28
+	5,Jessica Davis,22
+
+
+1)	Make Folder in HDFS
+
+		hdfs dfs -mkdir /TempDir			
+
+2)	Give Permission
+	
+		hdfs dfs -chmod 775 /TempDir
+
+3)	Assign Ownership to impala	
+		sudo -u hdfs hdfs dfs -chown impala:impala /TempDir
+
+4)	Put the .csv file to Hadoop
+
+		hdfs dfs -put data.csv /TempDir
+
+5)	Verify the file in hadoop	
+
+		hdfs dfs -ls /TempDir
+
+6)	Show the contents to confirm
+
+		hdfs dfs -cat /TempDir/data.csv
+	
+
+---------------------------------------------------------------------------------------------
+Open Cloudera - Query - Impala Editor
+-----------------------------------------------
+CREATE DATABASE sample_db;
+USE sample_db;
+
+CREATE TABLE sample_table1 (
+    id INT,
+    name STRING,
+    age INT
+)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY ','
+STORED AS TEXTFILE
+LOCATION 'hdfs:///TempDir';
+
+
+LOAD DATA INPATH  '/TempDir/data.csv' INTO TABLE sample_table1;
+
+SELECT * FROM sample_table1;
+
+
+----------------------------------------
+
+Success! You can now log into Cloudera Manager from the QuickStart VM's browser:
+
+    http://quickstart.cloudera:7180
+
+    Username: cloudera
+    Password: cloudera
+
+

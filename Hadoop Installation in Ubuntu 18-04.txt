@@ -1,0 +1,233 @@
+Installing Hadoop on Ubuntu 18.04
+------------------------------------------------------------------
+
+Pre-Requisites
+-------------------------------------------------------------------
+
+	Remove Lock (if any)
+	--------------------------------
+		sudo rm /var/lib/apt/lists/lock
+		sudo rm /var/cache/apt/archives/lock
+		sudo rm /var/lib/dpkg/lock*
+		
+
+Installing Hadoop on Ubuntu 18.04
+------------------------------------------------------------------
+
+1) update the system repositories:
+
+	$ sudo apt update
+
+2)  install Java on our Ubuntu system:
+
+	$ sudo apt install openjdk-11-jdk  -y
+
+3) verify the existence of the Java by its version:
+
+	$ java -version
+
+4) create a separate user for running Apache Hadoop on our system:
+
+	$ sudo adduser hadoopuser
+
+	Give Sudo Permission for Hadoop user by:
+	
+		sudo visudo
+		hadoopuser ALL=(ALL:ALL) ALL
+		save file
+
+5) switch the current user with “hadoopuser”:
+
+	$ su - hadoopuser
+
+6) generating private and public key pairs:
+
+	$ ssh-keygen -t rsa
+	
+	Enter the file to save the key pair. Add a passphrase to be used in the whole setup of the Hadoop user:
+
+
+7) add these key pairs to the ssh authorized_keys:
+
+	$ cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+8)  Add file permissions,  so that only the “owner” of the file will have the read and write permissions
+
+	$ chmod 640 ~/.ssh/authorized_keys
+
+9) authenticate the localhost by writing out the following command:
+	
+	Install SSH with:
+		
+		$ sudo apt-get install openssh-client openssh-server
+		$ ssh localhost
+
+10) Use the wget command for installing the Hadoop framework for your system:
+
+	$ wget https://downloads.apache.org/hadoop/common/hadoop-3.3.0/hadoop-3.3.0.tar.gz
+
+11) Extract the downloaded “hadoop-3.3.0.tar.gz” file with the tar command:
+
+	$ tar -xvzf hadoop-3.3.0.tar.gz
+
+12) rename the extracted directory: 
+	$ mv hadoop-3.3.0 hadoop
+
+13)  configure Java environment variables for setting up Hadoop. For this, check out the location of our “JAVA_HOME” :
+
+	$ dirname $(dirname $(readlink -f $(which java)))
+
+14) Open the “~/.bashrc” file in your “nano” text editor:
+
+	$ nano ~/.bashrc
+15) Add the following paths in the opened “~/.bashrc” file:
+
+		export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+		export HADOOP_HOME=/home/hadoopuser/hadoop
+		export HADOOP_INSTALL=$HADOOP_HOME
+		export HADOOP_MAPRED_HOME=$HADOOP_HOME
+		export HADOOP_COMMON_HOME=$HADOOP_HOME
+		export HADOOP_HDFS_HOME=$HADOOP_HOME
+		export HADOOP_YARN_HOME=$HADOOP_HOME
+		export HADOOP_COMMON_LIB_NATIVE_DIR=$HADOOP_HOME/lib/native
+		export PATH=$PATH:$HADOOP_HOME/sbin:$HADOOP_HOME/bin
+		export HADOOP_OPTS="-Djava.library.path=$HADOOP_HOME/lib/native"
+
+After that, press “CTRL+o” to save the changes & "CTRL + x" to exit:
+
+16) Now, write out the below-given command to activate the “JAVA_HOME” environment variable:
+
+	$ source ~/.bashrc
+
+17) open up the environment variable file of Hadoop:
+
+	$ nano $HADOOP_HOME/etc/hadoop/hadoop-env.sh
+
+	set “JAVA_HOME” variable in the Hadoop environment:
+
+		export JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
+
+	After that, press “CTRL+o” to save the changes & "CTRL + x" to exit:
+	
+We have successfully installed JAVA and Hadoop, created Hadoop users, configured SSH key-based authentication. 
+
+
+18) Create two directories: datanode and namenode, inside the home directory of Hadoop:
+
+	$ mkdir -p ~/hadoopdata/hdfs/namenode
+	$ mkdir -p ~/hadoopdata/hdfs/datanode
+
+19) update the Hadoop “core-site.xml” file by adding our hostname:
+
+	open up the “core-site.xml” file in your “nano” editor:
+		$ nano $HADOOP_HOME/etc/hadoop/core-site.xml
+
+
+	<configuration>
+	<property>
+              		  <name>fs.defaultFS</name>
+              		  <value>hdfs://hadoop.linuxhint-VBox.com:9000</value>
+       	 </property>
+	</configuration>
+
+	After that, press “CTRL+o” to save the changes & "CTRL + x" to exit:
+
+20) In the “hdfs-site.xml” file, we will change the directory path of “datanode” and “namenode”:
+
+	$ nano $HADOOP_HOME/etc/hadoop/hdfs-site.xml
+
+	<configuration>
+ 
+       	 <property>
+         		<name>dfs.replication</name>
+	                <value>1</value>
+	  </property>
+ 
+ 	  <property>
+                	<name>dfs.name.dir</name>
+	                <value>file:///home/hadoopuser/hadoopdata/hdfs/namenode</value>
+	  </property>
+ 
+ 	  <property>
+                	<name>dfs.data.dir</name>
+	                <value>file:///home/hadoopuser/hadoopdata/hdfs/datanode</value>
+	</property>
+</configuration>
+
+	After that, press “CTRL+o” to save the changes & "CTRL + x" to exit:
+
+21) open up the “mapred-site.xml” file and add the below-given code in it:
+
+	$ nano $HADOOP_HOME/etc/hadoop/mapred-site.xml
+	
+	<configuration>
+        	<property>
+           		     <name>mapreduce.framework.name</name>
+            		    <value>yarn</value>
+     	   </property>
+	</configuration>
+
+	After that, press “CTRL+o” to save the changes & "CTRL + x" to exit:
+
+22) The last file that needs to be updated is the “yarn-site.xml”:
+	
+	$ nano $HADOOP_HOME/etc/hadoop/yarn-site.xml
+
+	<configuration>
+     	 <property>
+                	<name>yarn.nodemanager.aux-services</name>
+	                <value>mapreduce_shuffle</value>
+	</property>
+	</configuration>
+	
+	After that, press “CTRL+o” to save the changes & "CTRL + x" to exit:
+
+23) We have to start the Hadoop cluster to operate Hadoop. For this, we will format our “namenode” first:
+
+	$ hdfs namenode -format	
+
+24)  Update the hostname by editing the below file:
+	
+	$ sudo nano /etc/hosts    - Edit the below line from 
+
+	127.0.0.1 	ubuntu
+
+		to, 
+
+	127.0.0.1 	hadoop.ubuntu.com
+
+	After that, press “CTRL+o” to save the changes & "CTRL + x" to exit:
+
+25) Generate new keygen.
+
+		ssh-keygen -t rsa -P '' -f ~/.ssh/id_rsa
+      Register key gen:
+
+		cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys
+
+26) Now start the Hadoop cluster by writing out the below-given command in your terminal:
+
+	$ start-dfs.sh
+
+27) next step, we will start the “yarn” service of the Hadoop:
+
+	$ start-yarn.sh
+
+28) To check the status of all services of Hadoop, execute the “jps” command in your terminal:
+
+	$ jps
+
+29) Hadoop listens at the port 8088 and 9870, so you are required to permit these ports through the firewall:
+
+	sudo apt install firewalld -y
+	sudo firewall-cmd --permanent --add-port=9870/tcp
+	sudo firewall-cmd --permanent --add-port=8088/tcp
+	sudo firewall-cmd --reload
+
+30) Now, open up your browser, and access your Hadoop “namenode” by entering your IP address with the port 9870:
+
+		http://127.0.0.1:9870 
+
+	Utilize the port “8080” with your IP address to access the Hadoop resource manager:
+
+		http://127.0.0.1:8088

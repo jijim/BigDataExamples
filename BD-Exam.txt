@@ -1,0 +1,233 @@
+1
+A technique that allows users to share a physical instance or resource with many organizations.
+Option A : SandBoxing
+Option B : Virtualization
+Option C : Boxing
+Option D : HyperLoop
+
+2 Cloud computing architecture comprises many cloud components, which are
+Option A : loosely coupled
+Option B : tightly coupled
+Option C : moderately coupled
+Option D : All of the mentioned
+
+3 Which of the following is an example of a sophisticated analytics?
+Option A : Microstrategy
+Option B : SPSS IBM
+Option C : IBM SPSS
+Option D : SAS and IBM SPSS
+
+4 Business Analytics (BA) is the practice of _____________
+Option A : Logical
+Option B : Methodical
+Option C : Interactive
+Option D : All the above
+
+5 Data Management encompasses ___________________ disciplines?
+Option A : Data Integeration
+Option B : Data quality
+Option C : Content Management
+Option D : All of the mentioned
+
+6 Which type of data Hadoop can deal with is
+Option A : Structured
+Option B : Semi - structured
+Option C : Unstructured
+Option D : All of the mentioned
+
+7 How many time data has been replicated by default ?
+Option A : 1
+Option B : 2
+Option C : 3
+Option D : NULL
+
+8 The namenode knows that the data node is active using a mechanism known as
+Option A : Active pulse
+Option B : Active pulse
+Option C : Heartbeats
+Option D : h-signal
+
+9 The master node that has the metadata information for all the data blocks in the HDFS is
+Option A : DataNode
+Option B : Nodemis
+Option C : NameNode
+Option D : YARN
+
+10 The cloud architecture broadly divided into _________ parts
+Option A : Two
+Option B : Three
+Option C : Four
+Option D : Six
+
+11 Which of the following is a type of business analytics?
+Option A : Discovery analytics
+Option B : Prediction analytics
+Option C : Visualization analytics
+Option D : Prescriptive analytics
+
+12 __________ has the world’s largest Hadoop cluster
+Option A : Instagram
+Option B : Facebook
+Option C : Google
+Option D : Twitter
+
+13 ________ NameNode is used when the Primary NameNode goes down.
+Option A : Rack
+Option B : Data
+Option C : Secondary
+Option D : None of the mentioned
+
+14 What is HDFS?
+Option A : Storage layer
+Option B : Batch processing engine
+Option C : Resource management layer
+Option D : All of the above
+
+15
+IOT represent the general concept of the ability of network devices to sense and collect data from the wo
+rld around us and then share the data across the Internet
+Option A : True
+Option B : False
+Option C :
+Option D :
+16 Clustering Algorithms classified into ________ categories
+Option A : 3
+Option B : 5
+Option C : 6
+Option D : 7
+17 ________ has many of the characteristics of what is now being called cloud computing.
+Option A : Internet
+Option B : Artificial Intelligence
+Option C : Machine Learning
+Option D : Web Service
+
+18 Which one of the following is false about Hadoop?
+Option A : It is a distributed framework
+Option B : The main algorithm used in it is Map Reduce
+Option C : It runs with commodity hard ware
+Option D : All are true
+
+19 Hadoop Framework is written in
+Option A : Python
+Option B : Dot Net
+Option C : Programming in C
+Option D : JAVA
+20 Point the advantages of Business Analytics
+Option A : Companies gain competitive advantages
+Option B : It reduce the operational costs and risks
+Option C : It provide the 360-degree view of the organization
+Option D : All the above
+21 __________ maps input key/value pairs to a set of intermediate key/value pairs.
+Option A : Reducer
+Option B : Mapper
+Option C : Both Mapper and Reducer
+Option D : Data Replication
+22 Business Analytics (BA) consists of _____________ areas
+Option A : Two
+Option B : Three
+Option C : Four
+Option D : Five
+23 What are the Key issues of IOT?
+Option A : Privacy
+Option B : Security
+Option C : Wxpensive
+Option D : All of the mentioned
+24 For YARN, the ___________ Manager UI provides host and port information.
+Option A : Data Node
+Option B : Resource
+Option C : NameNode
+Option D : Replication
+25 ________________________ is a grid-based clustering algorithm?
+Option A : Wave-cluster
+Option B : K-means
+Option C : Rock
+Option D : DENCLUE
+26 Hadoop is designed using which programming model ?
+Option A : C#
+Option B : HTML
+Option C : MapReduce
+Option D : HDFS
+27 Which of the following statement is true about Big Data Management?
+Option A : Big challenge for organizations
+Option B : Needs high level maintenance
+Option C : Data is critical and huge
+Option D : All the above
+28
+_____________________ helps user to understand and discover the data which is worth analyzing usin
+g self-service tools.
+Option A : Catalogs
+Option B : Logs
+Option C : Metadata Catalogs
+Option D : Meta Node-Logs
+29 Is data movement is the biggest challenge in Big Data?
+Option A : True
+Option B : False
+Option C :
+Option D :
+30 ________ is the slave/worker node and holds the user data in the form of Data Blocks.
+Option A : DataNode
+Option B : NameNode
+Option C : Data block
+Option D : Replication
+31 Which of these is best suited for assigning resources to a highly parallel application?
+Option A : HDFS
+Option B : Hadoop
+Option C : YARN
+Option D : Spark
+32 Paxata focus on _____________________ for Big Data
+Option A : front-user prep
+Option B : backend-user
+Option C : end-user prep
+Option D : both front & back-user prep
+33 Which of the following cloud concept is related to pooling and sharing of resources?
+Option A : Reliability
+Option B : Productivity
+Option C : Abstraction
+Option D : Virtualization
+34 Point out the wrong statement.
+Option A : The big volume indeed represents Big Data
+Option B : The data growth and social media explosion have changed how we look at the data
+Option C : Big Data is just about lots of data
+Option D : All of the mentioned
+35 In HDFS the files cannot be ______________________
+Option A : Read
+Option B : Write
+Option C : Delete
+Option D : Execute
+36 HDFS works in a __________ fashion.
+Option A : master-worker
+Option B : master-slave
+Option C : worker/slave
+Option D : all of the mentioned
+37
+___________ part of the MapReduce is responsible for processing one or more chunks of data and prod
+ucing the output results.
+Option A : Maptask
+Option B : Mapper
+Option C : ReduceTask
+Option D : Reducer
+38 Which of the following characteristic of big data is relatively more concerned to Big Data?
+Option A : Velocity
+Option B : Variety
+Option C : Volume
+Option D : All the above
+39 A ________ serves as the master and there is only one NameNode per cluster.
+Option A : Data Node
+Option B : Data block
+Option C : NameNode
+Option D : Replication
+40 Which of the following step is performed by data scientist after acquiring the data?
+Option A : Data Cleansing
+Option B : Data Integration
+Option C : Data Replication
+Option D : All of the mentioned
+41 What is the Port Number for NameNode?
+Option A : Port 50070
+Option B : Port 40075
+Option C : Port 9080
+Option D : Port 8000
+42 What is the default size of HDFS Data Block?
+Option A : 16MB
+Option B : 32MB
+Option C : 64MB
+Option D : 128MB
